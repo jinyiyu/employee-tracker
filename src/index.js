@@ -1,5 +1,4 @@
 const getAnswers = require("./utils/getAnswers");
-const inquirer = require("inquirer");
 
 // questions list
 const loopingQuestion = [
