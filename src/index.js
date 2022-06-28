@@ -1,5 +1,8 @@
+const getAnswers = require("./utils/getAnswers");
+const inquirer = require("inquirer");
+
 // questions list
-const loopingQuestions = [
+const loopingQuestion = [
   {
     name: "toDo",
     type: "list",
@@ -17,3 +20,5 @@ const loopingQuestions = [
     ],
   },
 ];
+const actionPoint = getAnswers(loopingQuestion);
+console.log(actionPoint);
