@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 
-const getAnswers = async (fn) => {
-  return await inquirer.prompt(fn);
+const getAnswers = async (questions) => {
+  return await inquirer.prompt(questions);
 };
 
 module.exports = getAnswers;
