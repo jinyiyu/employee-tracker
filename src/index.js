@@ -1,5 +1,14 @@
+const cTable = require("console.table");
 const mysql = require("mysql2/promise");
-const { getAllDepartments } = require("./utils/company");
+const {
+  getAllDepartments,
+  addDepartment,
+  viewAllRoles,
+  viewAllEmployees,
+  addRole,
+  addAnEmployee,
+  updateAnEmployeeRole,
+} = require("./utils/company");
 const getAnswers = require("./utils/getAnswers");
 
 // questions list
@@ -31,7 +40,7 @@ const init = async () => {
     database: "company_db",
   };
 
-  //connect your database
+  //connect the company database
   const db = await mysql.createConnection(config);
 
   let status = true;
@@ -41,17 +50,17 @@ const init = async () => {
     if (actionPoint === "viewAllDepartments") {
       await getAllDepartments(db);
     } else if (actionPoint === "viewAllRoles") {
-      console.log("viewAllRoles");
+      await viewAllRoles(db);
     } else if (actionPoint === "viewAllEmployees") {
-      console.log("viewAllEmployees");
+      await viewAllEmployees(db);
     } else if (actionPoint === "addDepartment") {
-      console.log("addDepartment");
+      await addDepartment(db);
     } else if (actionPoint === "addRole") {
-      console.log("addRole");
+      await addRole(db);
     } else if (actionPoint === "addAnEmployee") {
-      console.log("addAnEmployee");
+      await addAnEmployee(db);
     } else if (actionPoint === "updateAnEmployeeRole") {
-      console.log("updateAnEmployeeRole");
+      await updateAnEmployeeRole(db);
     } else {
       status = false;
       await db.end();
