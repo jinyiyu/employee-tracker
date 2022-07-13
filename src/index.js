@@ -1,7 +1,7 @@
 const cTable = require("console.table");
 const mysql = require("mysql2/promise");
 const {
-  getAllDepartments,
+  viewAllDepartments,
   addDepartment,
   viewAllRoles,
   viewAllEmployees,
@@ -48,7 +48,7 @@ const init = async () => {
   while (status) {
     const { actionPoint } = await getAnswers(loopingQuestion);
     if (actionPoint === "viewAllDepartments") {
-      await getAllDepartments(db);
+      await viewAllDepartments(db);
     } else if (actionPoint === "viewAllRoles") {
       await viewAllRoles(db);
     } else if (actionPoint === "viewAllEmployees") {
