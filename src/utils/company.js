@@ -10,7 +10,10 @@ const viewAllDepartments = async (db) => {
 
 // to do - change the department_id key to other name later
 const viewAllRoles = async (db) => {
-  const [roles] = await db.query("SELECT * FROM roles");
+  const [roles] =
+    await db.query(`SELECT roles.id, roles.title AS 'Role', roles.salary AS 'Salary', departments_id AS 'Department' 
+  FROM roles 
+  LEFT JOIN departments ON roles.department_id = departments.id`);
   console.table(roles);
 };
 
@@ -36,13 +39,13 @@ const addDepartment = async (db) => {
 
 const addRole = async (db) => {
   // get all department - change to inquirer format
-  // get answers - which role you wanna add
+
   const [departments] = await db.query("SELECT * FROM departments");
   const departmentChoices = departments.map((department) => {
     return { name: department.name, value: department.id };
   });
-  console.log(departmentChoices);
 
+  // get answers - which role you wanna add
   const roleQuestion = [
     {
       type: "input",
@@ -68,9 +71,54 @@ const addRole = async (db) => {
   VALUES ("${title}","${salary}","${department_id}")`);
 };
 
-// to do
-const addAnEmployee = () => {
-  console.log("addAnEmployee");
+const addAnEmployee = async (db) => {
+  // Get all roles from DB and construct role choices
+  const [roles] = await db.query("SELECT * FROM roles");
+  const roleChoices = roles.map((role) => {
+    return { name: role.title, value: role.id };
+  });
+  console.log(roleChoices);
+
+  // Get all employees from DB and construct employee choices
+  const [employees] = await db.query("SELECT * FROM employees");
+  const managerList = employees.map((employee) => {
+    return {
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    };
+  });
+  console.log(managerList);
+
+  const roleQuestion = [
+    {
+      type: "input",
+      message: "Please enter the first name of the employee?",
+      name: "first_name",
+    },
+    {
+      type: "input",
+      message: "Please enter the last name of the employee?",
+      name: "last_name",
+    },
+    {
+      type: "list",
+      message: "Please select the role the employee belongs to:",
+      name: "role_id",
+      choices: roleChoices,
+    },
+    {
+      type: "list",
+      message: "Please select the employee's manager",
+      name: "manager_id",
+      choices: managerList,
+    },
+  ];
+  const { first_name, last_name, role_id, manager_id } = await getAnswers(
+    roleQuestion
+  );
+  console.log({ first_name, last_name, role_id, manager_id });
+  await db.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) 
+  VALUES ("${first_name}","${last_name}","${role_id}","${manager_id}")`);
 };
 
 // to do
