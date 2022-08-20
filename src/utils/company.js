@@ -8,18 +8,24 @@ const viewAllDepartments = async (db) => {
   console.table(departments);
 };
 
-// to do - change the department_id key to other name later
 const viewAllRoles = async (db) => {
   const [roles] =
-    await db.query(`SELECT roles.id, roles.title AS 'Role', roles.salary AS 'Salary', departments_id AS 'Department' 
-  FROM roles 
+    await db.query(`SELECT roles.id, roles.title AS 'Role', roles.salary AS 'Salary', 
+    departments.name AS 'Department' FROM roles 
   LEFT JOIN departments ON roles.department_id = departments.id`);
   console.table(roles);
 };
 
-// to do - change the manager and role_id key to other name later
 const viewAllEmployees = async (db) => {
-  const [employees] = await db.query("SELECT * FROM employees");
+  const [employees] =
+    await db.query(`SELECT emp.id, emp.first_name AS 'First Name', 
+    emp.last_name AS 'Last Name', roles.title AS 'Role', roles.salary AS 'Salary', 
+    departments.name AS 'Department', 
+    CONCAT(empManager.first_name, " ", empManager.last_name) AS 'Manager' 
+    FROM employees emp
+  LEFT JOIN roles ON emp.role_id = roles.id
+  LEFT JOIN departments ON roles.department_id = departments.id
+  LEFT JOIN employees empManager ON emp.manager_id = empManager.id`);
   console.table(employees);
 };
 
@@ -39,7 +45,6 @@ const addDepartment = async (db) => {
 
 const addRole = async (db) => {
   // get all department - change to inquirer format
-
   const [departments] = await db.query("SELECT * FROM departments");
   const departmentChoices = departments.map((department) => {
     return { name: department.name, value: department.id };
@@ -121,9 +126,47 @@ const addAnEmployee = async (db) => {
   VALUES ("${first_name}","${last_name}","${role_id}","${manager_id}")`);
 };
 
-// to do
-const updateAnEmployeeRole = () => {
-  console.log("updateAnEmployeeRole");
+const updateAnEmployeeRole = async (db) => {
+  // Get all roles from DB and construct role choices
+  const [roles] = await db.query("SELECT * FROM roles");
+  const roleChoices = roles.map((role) => {
+    return { name: role.title, value: role.id };
+  });
+  console.log(roleChoices);
+
+  // Get all employees from DB and construct employee choices
+  const [employees] = await db.query("SELECT * FROM employees");
+  const employeeList = employees.map((employee) => {
+    return {
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    };
+  });
+
+  const Questions = [
+    {
+      type: "list",
+      message: "Which employee would you like to update?",
+      name: "employee",
+      choices: employeeList,
+    },
+    {
+      type: "list",
+      message: "Please update the role of the employee from the following:",
+      name: "role_id",
+      choices: roleChoices,
+    },
+  ];
+  const { employee, role_id } = await getAnswers(Questions);
+  console.log(employee, role_id);
+
+  await db.query(
+    `UPDATE employees SET role_id = '${role_id}' WHERE id="${employee}"`
+  );
+  return res.json({
+    success: true,
+    message: "employee successfully updated",
+  });
 };
 
 module.exports = {
