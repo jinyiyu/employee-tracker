@@ -4,13 +4,13 @@
 
 - [About this Project](#about-this-project)
 - [Links to the Project](#Links-to-the-Project)
+- [Demo Video](#Demo-Video)
 - [User Story](#User-Story)
 - [Criteria](#Criteria)
 - [Mock-Up](#Mock-Up)
-- [Demo Video](#Demo-Video)
 - [Run the project](#Run-the-project)
 - [File Structure](#File-Structure)
-- [Employee Classes Structure](#Employee-Classes-Structure)
+- [Database Structure](#Database-Structure)
 - [Technologies](#Technologies)
 - [How To Contact Me](#How-To-Contact-Me)
 - [Authored by](#Authored-by)
@@ -33,6 +33,10 @@ Because this application won’t be deployed, I’ll create a walkthrough video 
 Check out the Github Repository [Here](https://github.com/jinyiyu/employee-tracker)
 
 <br>
+
+## Demo Video
+
+Check out the Demo Video [Here](./src/video/employee-tracker%20demo%20video.mp4) or [Here](https://drive.google.com/file/d/13pfg9qCP7nhUhfiOQl3nDRgfzLSA1yAi/view)
 
 ## User Story
 
@@ -73,10 +77,6 @@ The following video shows an example of the application being used from the comm
 [![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/12-sql-homework-video-thumbnail.png)](https://2u-20.wistia.com/medias/2lnle7xnpk)
 
 <br />
-
-## Demo Video
-
-Check out the Demo Video [Here](./src/video/employee-tracker%20demo%20video.mp4) or [Here](https://drive.google.com/file/d/13pfg9qCP7nhUhfiOQl3nDRgfzLSA1yAi/view)
 
 ## Run the project
 
