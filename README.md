@@ -19,12 +19,9 @@
 
 ## About this Project
 
-```
 Developers frequently have to create interfaces that allow non-developers to easily view and interact with information stored in databases. These interfaces are called **content management systems (CMS)**. This project is a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
 Because this application won’t be deployed, I’ll create a walkthrough video that demonstrates its functionality.
-
-```
 
 <br>
 
@@ -37,6 +34,7 @@ Check out the Github Repository [Here](https://github.com/jinyiyu/employee-track
 ## Demo Video
 
 Check out the Demo Video [Here](./src/video/employee-tracker%20demo%20video.mp4) or [Here](https://drive.google.com/file/d/13pfg9qCP7nhUhfiOQl3nDRgfzLSA1yAi/view)
+<br>
 
 ## User Story
 
@@ -74,7 +72,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 The following video shows an example of the application being used from the command line:
 
-[![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/12-sql-homework-video-thumbnail.png)](https://2u-20.wistia.com/medias/2lnle7xnpk)
+[![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/12-sql-homework-video-thumbnail.png)](./src/video/12-sql-homework-demo-01.png)
 
 <br />
 
@@ -141,7 +139,7 @@ please look at following chart for the directory structure:
 
 Design the database schema as shown in the following image:
 
-![Database schema includes tables labeled “employee,” role,” and “department.”](./Assets/12-sql-homework-demo-01.png)
+![Database schema includes tables labeled “employee,” role,” and “department.”](./src/video/12-sql-homework-video-thumbnail.png)
 
 As the image illustrates, your schema should contain the following three tables:
 
