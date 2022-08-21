@@ -132,7 +132,6 @@ const updateAnEmployeeRole = async (db) => {
   const roleChoices = roles.map((role) => {
     return { name: role.title, value: role.id };
   });
-  console.log(roleChoices);
 
   // Get all employees from DB and construct employee choices
   const [employees] = await db.query("SELECT * FROM employees");
@@ -158,15 +157,10 @@ const updateAnEmployeeRole = async (db) => {
     },
   ];
   const { employee, role_id } = await getAnswers(Questions);
-  console.log(employee, role_id);
 
   await db.query(
     `UPDATE employees SET role_id = '${role_id}' WHERE id="${employee}"`
   );
-  return res.json({
-    success: true,
-    message: "employee successfully updated",
-  });
 };
 
 module.exports = {
